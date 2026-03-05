@@ -5,18 +5,21 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import PasswordField from "@/components/PasswordField";
 import Spinner from "@/components/Spinner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginInput, loginSchema } from "../validation/login.validation";
 
 const ReisterForm: React.FC = () => {
   // react hook form & zod
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     reset,
-  //     formState: { errors, isSubmitting, isValid },
-  //   } = useForm<RegisterInput>({
-  //     resolver: zodResolver(registerSchema),
-  //     mode: "onChange",
-  //   });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<LoginInput>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+  });
 
   // firbase
   //   const { error, onRegisterSubmit } = useSignUp(reset);
@@ -32,10 +35,11 @@ const ReisterForm: React.FC = () => {
   //       }
   //     )?._tokenResponse?.error?.message || error?.message;
 
-  // handlers
-  //   const onSubmit = async (data) => {
-  //     await onRegisterSubmit(data);
-  //   };
+  //   handlers
+  const onSubmit = async (data: LoginInput) => {
+    console.log(data);
+    //   await onRegisterSubmit(data);
+  };
 
   return (
     <section className="p-6 bg-white shadow-lg rounded-md sm:w-4/5 md:w-3/5 lg:w-1/2 xl:w-1/3">
@@ -49,30 +53,28 @@ const ReisterForm: React.FC = () => {
       </header>
 
       {/* form */}
-      {/* <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}> */}
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <FormField
           label="Email Address"
           placeholder="Enter your email address"
           id="email"
           type="email"
-          //   {...register("email")}
-          //   error={errors.email?.message}
+          {...register("email")}
+          error={errors.email?.message}
         />
         <PasswordField
           label="Password"
           placeholder="Enter your password"
           id="password"
-          //   {...register("password")}
-          //   error={errors.password?.message}
+          {...register("password")}
+          error={errors.password?.message}
         />
         <Button
           type="submit"
           className="w-full"
-          //   disabled={!isValid || isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
-          {/* {isSubmitting ? <Spinner /> : "Login"} */}
-          Login
+          {isSubmitting ? <Spinner /> : "Login"}
         </Button>
       </form>
 

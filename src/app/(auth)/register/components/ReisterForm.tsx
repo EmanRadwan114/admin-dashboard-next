@@ -11,15 +11,9 @@ import {
 } from "../validation/register.validation";
 import PasswordField from "@/components/PasswordField";
 import Spinner from "@/components/Spinner";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/lib/firebase/firebase.config";
-import { toast } from "react-toastify";
-import { updateProfile, User } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useSignUp } from "../hooks/useSignUp";
 
 const ReisterForm: React.FC = () => {
-  const router = useRouter();
-
   // react hook form & zod
   const {
     register,
@@ -32,8 +26,7 @@ const ReisterForm: React.FC = () => {
   });
 
   // firbase
-  const [createUserWithEmailAndPassword, , , error] =
-    useCreateUserWithEmailAndPassword(auth);
+  const { error, onRegisterSubmit } = useSignUp(reset);
 
   const firebaseErr =
     (
@@ -48,24 +41,7 @@ const ReisterForm: React.FC = () => {
 
   // handlers
   const onSubmit = async (data: RegisterInput) => {
-    try {
-      const res = await createUserWithEmailAndPassword(
-        data.email,
-        data.password,
-      );
-
-      // update profile to store username
-      if (res?.user) {
-        await updateProfile(res?.user as User, {
-          displayName: data.fullName,
-        });
-        toast.success("Account created successfully");
-        reset();
-        router.push("/login");
-      }
-    } catch (error: unknown) {
-      toast.error((error as { message: string })?.message);
-    }
+    await onRegisterSubmit(data);
   };
 
   return (

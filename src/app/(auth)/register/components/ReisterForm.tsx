@@ -10,6 +10,7 @@ import {
   RegisterInput,
 } from "../validation/register.validation";
 import PasswordField from "@/components/PasswordField";
+import Spinner from "@/components/Spinner";
 
 const ReisterForm: React.FC = () => {
   // react hook form & zod
@@ -70,7 +71,7 @@ const ReisterForm: React.FC = () => {
           className="w-full"
           disabled={!isValid || isSubmitting}
         >
-          Register
+          {isSubmitting ? <Spinner /> : "Register"}
         </Button>
       </form>
 

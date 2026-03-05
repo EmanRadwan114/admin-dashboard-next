@@ -8,6 +8,7 @@ import Spinner from "@/components/Spinner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginInput, loginSchema } from "../validation/login.validation";
+import { useLogin } from "../hooks/useLogin";
 
 const ReisterForm: React.FC = () => {
   // react hook form & zod
@@ -22,23 +23,13 @@ const ReisterForm: React.FC = () => {
   });
 
   // firbase
-  //   const { error, onRegisterSubmit } = useSignUp(reset);
+  const { error, onLoginSubmit } = useLogin(reset);
 
-  //   const firebaseErr =
-  //     (
-  //       error?.customData as unknown as {
-  //         _tokenResponse: {
-  //           error: {
-  //             message: string;
-  //           };
-  //         };
-  //       }
-  //     )?._tokenResponse?.error?.message || error?.message;
+  const firebaseErr = error?.code;
 
   //   handlers
   const onSubmit = async (data: LoginInput) => {
-    console.log(data);
-    //   await onRegisterSubmit(data);
+    await onLoginSubmit(data);
   };
 
   return (
@@ -49,7 +40,7 @@ const ReisterForm: React.FC = () => {
         <p className="text-gray-600">Please fill in the form below to login</p>
 
         {/* firebase error */}
-        {/* {error && <p className="text-red-800 text-sm">{firebaseErr}</p>} */}
+        {error && <p className="text-red-800 text-sm">{firebaseErr}</p>}
       </header>
 
       {/* form */}

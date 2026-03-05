@@ -28,16 +28,7 @@ const ReisterForm: React.FC = () => {
   // firbase
   const { error, onRegisterSubmit } = useSignUp(reset);
 
-  const firebaseErr =
-    (
-      error?.customData as unknown as {
-        _tokenResponse: {
-          error: {
-            message: string;
-          };
-        };
-      }
-    )?._tokenResponse?.error?.message || error?.message;
+  const firebaseErr = error?.code;
 
   // handlers
   const onSubmit = async (data: RegisterInput) => {

@@ -4,6 +4,7 @@ import { IProduct } from "../types/products.types";
 import ProductCard from "./ProductCard";
 import { useAppDispatch, useAppSelector } from "@/lib/redux-toolkit/hooks";
 import { setProducts } from "../store/products.slice";
+import Pagination from "./Pagination";
 
 interface IProps {
   products: IProduct[];
@@ -11,26 +12,35 @@ interface IProps {
 
 const DisplayedProducts: React.FC<IProps> = ({ products }) => {
   const dispatch = useAppDispatch();
-  const { filteredCachedProducts, selectedCategory, sortByPrice } =
-    useAppSelector((state) => state.products);
+  const {
+    filteredCachedProducts,
+    selectedCategory,
+    sortByPrice,
+    paginatedProducts,
+    currentPage,
+  } = useAppSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(setProducts(products));
   }, []);
 
   const displayedProducts =
-    selectedCategory === "" && sortByPrice === ""
+    selectedCategory === "" && sortByPrice === "" && currentPage === 1
       ? products
-      : filteredCachedProducts;
-
+      : currentPage === 1
+        ? filteredCachedProducts
+        : paginatedProducts;
   return (
     <>
       {displayedProducts.length > 0 ? (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {displayedProducts?.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        <>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {displayedProducts?.slice(0, 20).map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+          <Pagination />
+        </>
       ) : (
         <div className="flex items-center justify-center h-[30vh] w-full">
           <p className="text-xl capitalize">no products found</p>

@@ -27,7 +27,9 @@ export interface IMeta {
 export interface IProductsStore {
   cachedProducts: IProduct[];
   filteredCachedProducts: IProduct[];
+  paginatedProducts: IProduct[];
   cachedCategories: ICategory[];
   selectedCategory: string;
   sortByPrice: "asc" | "dsc" | "";
+  currentPage: number;
 }

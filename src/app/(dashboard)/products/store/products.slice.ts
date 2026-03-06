@@ -7,6 +7,8 @@ const initialState: IProductsStore = {
   filteredCachedProducts: [],
   selectedCategory: "",
   sortByPrice: "",
+  currentPage: 1,
+  paginatedProducts: [],
 };
 
 const productsSlice = createSlice({
@@ -42,9 +44,20 @@ const productsSlice = createSlice({
     sortProductsByPrice(state, action) {
       state.sortByPrice = action.payload;
 
+      state.currentPage = 1;
+
       state.filteredCachedProducts.sort((a, b) =>
         state.sortByPrice === "asc" ? a.price - b.price : b.price - a.price,
       );
+    },
+    handlePagination(state) {
+      const limit = 20;
+      const skip = (state.currentPage - 1) * limit;
+
+      state.paginatedProducts = state.filteredCachedProducts.slice(skip);
+    },
+    changePaginatePage(state, action) {
+      state.currentPage = action.payload;
     },
   },
 });
@@ -54,5 +67,7 @@ export const {
   setProducts,
   filterProductsByCategory,
   sortProductsByPrice,
+  handlePagination,
+  changePaginatePage,
 } = productsSlice.actions;
 export default productsSlice.reducer;

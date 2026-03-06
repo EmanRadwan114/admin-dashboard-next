@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import { ICategory } from "../types/categories.types";
 import { useAppDispatch } from "@/lib/redux-toolkit/hooks";
-import { filterProductsByCategory } from "../store/products.slice";
+import {
+  changePaginatePage,
+  filterProductsByCategory,
+} from "../store/products.slice";
 
 interface IProps {
   categories: ICategory[];
@@ -17,7 +20,7 @@ const ProductsFilter: React.FC<IProps> = ({ categories }) => {
   ) => {
     setCategory(e.target.value);
     dispatch(filterProductsByCategory(e.target.value));
-    console.log(e.target.value);
+    dispatch(changePaginatePage(1));
   };
 
   return (

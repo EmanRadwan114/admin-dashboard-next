@@ -1,3 +1,3 @@
 export default function DashboardPage() {
-  return <></>;
+  return <div className="w-full bg-white">hi</div>;
 }

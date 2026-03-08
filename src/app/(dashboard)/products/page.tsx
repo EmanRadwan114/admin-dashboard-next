@@ -1,4 +1,5 @@
 import DisplayedProducts from "./components/DisplayedProducts";
+import DownloadOptions from "./components/DownloadOptions";
 import ProductsFilter from "./components/ProductsFilter";
 import ProductsSortByPrice from "./components/ProductsSortByPrice";
 import { getAllCategories } from "./services/categories.services";
@@ -23,6 +24,7 @@ export default async function ProductsPage() {
       <header className="px-4 py-6 flex flex-col md:flex-row md:justify-between items-center gap-4 bg-white shadow-md rounded-md">
         <ProductsFilter categories={categoriesData} />
         <ProductsSortByPrice />
+        <DownloadOptions />
       </header>
 
       <DisplayedProducts products={productsData} />

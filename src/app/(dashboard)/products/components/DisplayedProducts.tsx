@@ -5,12 +5,11 @@ import { useAppDispatch, useAppSelector } from "@/lib/redux-toolkit/hooks";
 import { setProducts } from "../store/products.slice";
 import Pagination from "./Pagination";
 import ProductRow from "./ProductRow";
+import { tableHeaders } from "../data/tableHeaders";
 
 interface IProps {
   products: IProduct[];
 }
-
-const items = ["image", "title", "description", "category", "Status", "price"];
 
 const DisplayedProducts: React.FC<IProps> = ({ products }) => {
   const dispatch = useAppDispatch();
@@ -38,10 +37,13 @@ const DisplayedProducts: React.FC<IProps> = ({ products }) => {
         <>
           <div className="shadow-sm rounded-md border border-neutral-200 overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-neutral-200 table-fixed border-spacing-2">
+              <table
+                id="my-table"
+                className="min-w-full divide-y divide-neutral-200 table-fixed border-spacing-2"
+              >
                 <thead className="bg-foreground uppercase text-white">
                   <tr className="p-4 rounded-t-md">
-                    {items.map((item) => (
+                    {tableHeaders.map((item) => (
                       <th
                         className="font-normal px-6 py-3 text-sm tracking-wider text-center w-1/12"
                         key={item}

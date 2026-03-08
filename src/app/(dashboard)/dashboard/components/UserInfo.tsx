@@ -2,14 +2,12 @@
 import { auth } from "@/lib/firebase/firebase.config.client";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRef } from "react";
 import { Mail } from "lucide-react";
 
 const UserInfo: React.FC = () => {
   const [user] = useAuthState(auth);
   const [date] = useState(() => new Date());
 
-  console.log(user);
   return (
     <div className="bg-white rounded-md shadow-md border border-neutral-200 p-8 flex flex-col sm:flex-row justify-between items-center gap-6">
       <div className="space-y-2">

@@ -1,4 +1,4 @@
-import { auth } from "@/lib/firebase/firebase.config";
+import { auth } from "@/lib/firebase/firebase.config.client";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { RegisterInput } from "../validation/register.validation";
 import { updateProfile } from "firebase/auth";

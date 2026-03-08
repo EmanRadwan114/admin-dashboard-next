@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import Logout from "./Logout";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,7 @@ const Navbar: React.FC = () => {
             );
           })}
         </ul>
+        <Logout />
       </nav>
     </aside>
   );
@@ -90,6 +92,7 @@ const Navbar: React.FC = () => {
                 );
               })}
             </ul>
+            <Logout />
           </div>
         </div>
       </nav>

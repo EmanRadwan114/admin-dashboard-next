@@ -1,4 +1,4 @@
-import { auth } from "@/lib/firebase/firebase.config";
+import { auth } from "@/lib/firebase/firebase.config.client";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -13,8 +13,13 @@ export const useLogin = (reset: () => void) => {
   const onLoginSubmit = async (data: LoginInput) => {
     try {
       const res = await signInWithEmailAndPassword(data.email, data.password);
-      console.log(res);
       if (res) {
+        const token = await res.user.getIdToken();
+
+        await fetch("/api/login", {
+          method: "POST",
+          body: JSON.stringify({ token }),
+        });
         toast.success("Logged in successfully");
         reset();
         router.push("/dashboard");

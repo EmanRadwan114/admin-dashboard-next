@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/providers/StoreProvider";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 const robotoFont = Roboto({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -23,8 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${robotoFont.className} antialiased`}>
         <StoreProvider>
-          {children}
-          <ToastContainer />
+          <AuthProvider>
+            {children}
+            <ToastContainer />
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>

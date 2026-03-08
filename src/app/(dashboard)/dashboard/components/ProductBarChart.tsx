@@ -5,7 +5,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   TooltipPayload,
   Label,
@@ -62,7 +61,7 @@ const ProductBarChart = ({ products }: IProps) => {
 
   return (
     <div className="p-2 sm:p-4 lg:p-6 bg-white rounded-md shadow-md border border-neutral-200 h-[300px] lg:h-[400px]">
-      <h2 className="text-center text-lg font-bold mb-5">
+      <h2 className="text-center text-lg font-bold mb-5 text-foreground/60">
         Stock for top 10 rated products
       </h2>
       <ResponsiveContainer>

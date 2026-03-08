@@ -35,9 +35,11 @@ const productsSlice = createSlice({
         );
       }
 
-      result.sort((a, b) =>
-        state.sortByPrice === "asc" ? a.price - b.price : b.price - a.price,
-      );
+      if(state.sortByPrice !== ""){
+        result.sort((a, b) =>
+          state.sortByPrice === "asc" ? a.price - b.price : b.price - a.price,
+        );
+      }
 
       state.filteredCachedProducts = result;
     },

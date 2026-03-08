@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Dashboard
 
-## Getting Started
+A responsive dashboard built with **Next**, **React**, **TypeScript**, **TailwindCSS**, **Redux Toolkit**, and **Firebase**. It allows users to create an account, login, and logout. It also displays products in a table view that is fetched from [dummyjson website](https://dummyjson.com/) and can be exported in a xlsx or pdf formate.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js, React, TypeScript, TailwindCSS, and Redux Toolkit
+- Firebase
+- Docker
+- xlsx for excel formate export
+- jspdf and jspdf-autotable for pdf formate export
+- Recharts for charts
+- Axios for api calls
+- React-hook-form for forms
+- Zod for validation
+- Lucide-react for icons
+
+## Features
+
+- Component based architecture
+- TypeScript for type safety
+- Responsive design
+- Firebase authentication
+- Redux Toolkit for state management
+- TailwindCSS for styling
+- Docker for containerization
+- Protected Routes with Middleware
+- Display products from [dummyjson website](https://dummyjson.com/)
+- Export products to xlsx or pdf
+- Filter products by category
+- Sort products by price
+- Pagination
+
+## Installation
+
+```bash
+npm install
+```
+
+## Usage
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Docker
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key_here \
+  --build-arg NEXT_PUBLIC_AUTH_DOMAIN=your_firebase_auth_domain_here \
+  --build-arg NEXT_PUBLIC_PROJECT_ID=your_firebase_project_id_here \
+  --build-arg NEXT_PUBLIC_APP_ID=your_firebase_app_id_here \
+  --build-arg NEXT_PUBLIC_MEASUREMENT_ID=your_firebase_measurement_id_here \
+  --build-arg NEXT_PUBLIC_DUMMMY_JSON_BASE_URL=https://dummyjson.com \
+  -t next-dashboard .
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+docker run -p 3000:3000 next-dashboard
+```
 
-## Learn More
+# Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env` file with the following keys (replace with your own values):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
+NEXT_PUBLIC_AUTH_DOMAIN=your_auth_domain_here
+NEXT_PUBLIC_PROJECT_ID=your_project_id_here
+NEXT_PUBLIC_APP_ID=your_app_id_here
+NEXT_PUBLIC_MEASUREMENT_ID=your_measurement_id_here
+NEXT_PUBLIC_DUMMMY_JSON_BASE_URL=https://dummyjson.com
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+COOKIE_SECRET_KEY_1=your_cookie_secret_here
+COOKIE_SECRET_KEY_2=your_cookie_secret_here
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+FIREBASE_PROJECT_ID=your_project_id_here
+FIREBASE_CLIENT_EMAIL=your_service_account_email_here
+FIREBASE_PRIVATE_KEY="your_service_account_private_key_here"
+```

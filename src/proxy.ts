@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 const protectedRoutes = ["/dashboard", "/products"];
 const authRoutes = ["/login", "/register"];
 
-export function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const token = request.cookies.get("firebase-token")?.value;
   const { pathname } = request.nextUrl;
 

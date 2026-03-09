@@ -64,7 +64,7 @@ const ProductBarChart = ({ products }: IProps) => {
       <h2 className="text-center text-lg font-bold mb-5 text-foreground/60">
         Stock for top 10 rated products
       </h2>
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={chartData}
           margin={{ top: 30, right: 0, left: 5, bottom: 70 }}

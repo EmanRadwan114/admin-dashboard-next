@@ -10,7 +10,7 @@ A responsive dashboard built with **Next**, **React**, **TypeScript**, **Tailwin
 - xlsx for excel formate export
 - jspdf and jspdf-autotable for pdf formate export
 - Recharts for charts
-- Axios for api calls
+- Fetch API for api calls and caching
 - React-hook-form for forms
 - Zod for validation
 - Lucide-react for icons

@@ -1,6 +1,7 @@
-import { axiosInstance } from "@/lib/axios/axiosInstance";
-
 export const getProducts = async () => {
-  const response = await axiosInstance.get("/products?limit=190");
-  return response.data;
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_DUMMMY_JSON_BASE_URL}/products?limit=190`,
+  );
+  const data = await response.json();
+  return data;
 };
